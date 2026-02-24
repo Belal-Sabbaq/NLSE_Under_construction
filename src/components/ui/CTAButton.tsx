@@ -5,11 +5,12 @@ import { dictionary } from "@/lib/i18n";
 import { motion, useAnimation } from "framer-motion";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
-
+import { useRouter } from "next/navigation";
 export function CTAButton() {
     const { language, dir } = useLanguage();
     const text = dictionary[language].cta.button;
     const ArrowIcon = dir === "ltr" ? ArrowRight : ArrowLeft;
+    const router = useRouter();
 
     return (
         <motion.div
@@ -36,11 +37,11 @@ export function CTAButton() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="group relative inline-flex items-center justify-center gap-4 px-10 py-5 font-bold text-white transition-all bg-primary/60 backdrop-blur-xl border border-accent/60 rounded-full overflow-hidden shadow-[0_0_20px_rgba(200,168,86,0.3)] hover:shadow-[0_0_40px_rgba(200,168,86,0.6)] hover:border-accent"
+                onClick={() => router.push("/apply")}
             >
                 {/* Hover Light Sweep */}
                 <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:animate-[sweep_1.5s_ease-in-out_infinite]" />
 
-                <a href="https://forms.gle/jedyEVRXriRFkPCy7" target="_blank" rel="noopener noreferrer" className="relative z-10 text-sm md:text-base tracking-wide drop-shadow-sm">{text}</a>
 
                 <ArrowIcon className={cn(
                     "w-5 h-5 relative z-10 text-accent transition-transform duration-300",
